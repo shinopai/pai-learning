@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PaiLearning</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>PaiLearning</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <%= render 'partial/header' %>
+
+  <% if flash[:notice] %>
+  <p class="bg-green-300 text-center p-2 font-bold text-white"><%= notice %></p>
+  <% end %>
+
+  <% if flash[:alert] %>
+  <p class="bg-red-300 text-center p-2 font-bold text-white"><%= alert %></p>
+  <% end %>
+
+  <%= yield %>
+</body>
+
 </html>
