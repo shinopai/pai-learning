@@ -3,11 +3,11 @@ class Post < ApplicationRecord
   validates :title, :question, :answer,
             presence: true
   validates :title,
-            length: { maximum: 30 }
+            length: { maximum: 50 }
   validates :question,
-            length: { maximum: 200 }
+            length: { maximum: 300 }
   validates :answer,
-            length: { maximum: 200 }
+            length: { maximum: 300 }
 
   # relation
   belongs_to :user

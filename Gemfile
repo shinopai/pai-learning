@@ -62,6 +62,8 @@ gem 'rails-i18n'
 
 gem 'kaminari'
 
+gem 'ransack'
+
 gem 'dotenv-rails'
 
 gem 'faker'

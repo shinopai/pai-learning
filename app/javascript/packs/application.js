@@ -14,3 +14,11 @@ ActiveStorage.start()
 
 // tailwindcss
 import '../css/tailwind.css'
+
+// fontawesome
+import '@fortawesome/fontawesome-free/js/all';
+
+// jquery
+require('jquery')
+
+import '../lib/index';

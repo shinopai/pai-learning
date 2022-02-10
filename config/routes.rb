@@ -25,4 +25,10 @@ Rails.application.routes.draw do
   patch '/users/:id/update', to: 'users#update', as: :user_update
 
   # posts
+  resources :users do
+    resources :posts
+  end
+
+  # search post
+  get '/posts/search', to: 'posts#search', as: :search_posts
 end
