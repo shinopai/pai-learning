@@ -29,6 +29,8 @@ ja:
         title: タイトル
         question: 問題
         answer: 答え
+      comment:
+        body: 内容
     models:
       user: ユーザー
   devise:

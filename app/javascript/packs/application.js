@@ -20,5 +20,4 @@ import '@fortawesome/fontawesome-free/js/all';
 
 // jquery
 require('jquery')
-
 import '../lib/index';

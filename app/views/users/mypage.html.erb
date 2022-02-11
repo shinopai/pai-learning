@@ -19,14 +19,23 @@
       </tr>
       <tr class="border">
         <th class="p-2 border-r">問題投稿数</th>
-        <td class="pl-5">0</td>
+        <td class="pl-5"><%= @user.posts.size %></td>
       </tr>
       <tr class="border">
         <th class="p-2 border-r">問題集数</th>
         <td class="pl-5">0</td>
       </tr>
+      <tr class="border">
+        <th class="p-2 border-r">お気に入り問題数</th>
+        <td class="pl-5"><%= @user.likes.size %></td>
+      </tr>
     </tbody>
   </table>
-  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'block mt-3 text-blue-300 hover:text-blue-500' %>
-  <%= link_to 'ユーザー情報編集', user_edit_path(@user), class: 'block mt-2 text-blue-300 hover:text-blue-500' %>
+  <div class="flex mt-3 gap-2">
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'block text-blue-300 hover:text-blue-500' %>/
+    <%= link_to 'ユーザー情報編集', user_edit_path(@user), class: 'block text-blue-300 hover:text-blue-500' %>/
+    <%= link_to '問題一覧', user_all_posts_path(@user), class: 'block text-blue-300 hover:text-blue-500' %>/
+    <%= link_to '問題集一覧', '#', class: 'block text-blue-300 hover:text-blue-500' %>/
+    <%= link_to 'お気に入り一覧', '#', class: 'block text-blue-300 hover:text-blue-500' %>
+  </div>
 </div>

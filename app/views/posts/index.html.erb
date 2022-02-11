@@ -56,5 +56,7 @@
     </div>
   </div>
   <% end %>
+  <% if @posts.method_defined?(:total_pages)%>
   <%= paginate @posts %>
+  <% end %>
 </div>

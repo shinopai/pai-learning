@@ -1,0 +1,2 @@
+// vue
+import '../../lib/vue';

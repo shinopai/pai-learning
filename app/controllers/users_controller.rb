@@ -17,6 +17,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_all_posts
+    render 'all_posts'
+  end
+
+  def get_all_likes
+    render 'all_likes'
+  end
+
 
   private
   def get_user
