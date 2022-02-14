@@ -1,0 +1,22 @@
+<div class="max-w-2xl mx-auto sm:px-6 lg:px-8 mt-16">
+  <div class="overflow-hidden shadow-md">
+    <!-- card header -->
+    <div class="px-6 py-4 bg-white border-b border-gray-200 font-bold uppercase">
+      問題集に追加
+    </div>
+
+    <!-- card body -->
+    <div class="p-6 bg-white border-b border-gray-200">
+      <!-- content goes here -->
+      <p>1問を<%= link_to session[:collection]['title'], show_contents_user_collection_path(current_user, session[:collection]['id']), class: 'text-blue-500 hover:underline' %>に追加しました</p>
+      <p><%= session[:post]['title'] %>&nbsp;(作者:<%= session[:user]['name'] %>)</p>
+    </div>
+
+    <!-- card footer -->
+    <div class="p-6 bg-white border-gray-200 text-right flex justify-end">
+      <!-- button link -->
+      <%= link_to '問題集一覧を見る', list_user_collections_path(current_user), class: 'bg-gray-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-gray-400 rounded mr-3' %>
+      <%= link_to '登録を続ける', root_path, class: 'bg-blue-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-blue-400 rounded mr-3' %>
+    </div>
+  </div>
+</div>

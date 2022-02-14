@@ -1,11 +1,28 @@
 <!-- all posts -->
 <div class="container mt-20 w-2/3 mx-auto">
+
+  <ul class="flex gap-6 mb-10 justify-center text-lg font-bold">
+    <li class="hover:underline cursor-pointer">
+      <%= link_to '最新の問題', root_path %>
+    </li>
+    <li class="hover:underline cursor-pointer">
+      <%= link_to '問題集から探す', collections_path %>
+    </li>
+    <li class="hover:underline cursor-pointer">
+      <%= link_to 'カテゴリーから探す', categories_path %>
+    </li>
+  </ul>
+
   <% if @posts.exists? %>
   <% @posts.each do |post| %>
   <div class="w-full bg-white h-auto tracking-wide mt-10 mx-auto border border-black-800 rounded-lg relative">
+    <% if user_signed_in? %>
+    <% if post.user == current_user %>
     <div class="small-banner w-1 h-20 bg-blue-600 absolute rounded-tl-md"></div>
+    <% end %>
+    <% end %>
     <h5 class="text-2xl font-semibold pl-6 pt-6 pr-6 pb-2">
-      <%= link_to post.title, user_post_path(@user.id, post.id), class: 'hover:text-blue-500 hover:underline' %>
+      <%= link_to post.title, user_post_path(post.user.id, post.id), class: 'hover:text-blue-500 hover:underline' %>
     </h5>
     <p class="text-md font-regular p-6 pt-2 text-gray-500">
       <%= post.question %>
@@ -14,18 +31,22 @@
       <span class="bg-gray-300 px-2 py-1 rounded-2xl"><%= post.category.name %></span>
       <div class="flex justify-center items-center">
         <span class="mr-3">
-          <% if @user.user_image.blank? %>
+          <% if post.user.user_image.blank? %>
           <%= image_tag "user.jpg", class: 'rounded-full w-10 h-10' %>
           <% else %>
-          <%= image_tag @user.user_image.url, class: 'rounded-full w-10 h-10' %>
+          <%= image_tag post.user.user_image.url, class: 'rounded-full w-10 h-10' %>
           <% end %>
         </span>
-        <span><%= @user.name %></span>
-        <%= link_to edit_user_post_path(post.user_id, post.id) do %>
+        <span><%= post.user.name %></span>
+        <% if user_signed_in? %>
+        <% if post.user.id == current_user.id %>
+        <%= link_to edit_user_post_path(post.user.id, post.id) do %>
         <i class="fa-solid fa-pen-to-square ml-3 cursor-pointer" title="編集する"></i>
         <% end %>
-        <%= link_to user_post_path(@user, post.id), method: :delete, data: { confirm: '本当に削除してよろしいですか?' } do %>
+        <%= link_to user_post_path(post.user.id, post.id), method: :delete, data: { confirm: '本当に削除してよろしいですか?' } do %>
         <i class="fa-solid fa-trash-can ml-1 cursor-pointer" title="削除する"></i>
+        <% end %>
+        <% end %>
         <% end %>
       </div>
     </div>

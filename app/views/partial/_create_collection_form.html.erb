@@ -1,0 +1,15 @@
+<div class="flex items-center justify-center bg-gray-700 h-screen hidden" id="create-collection-form">
+  <div class="w-full max-w-md">
+    <%= form_with model: Collection.new, url: user_collections_path(current_user), class: 'bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-24', local: true do |new_collection| %>
+    <div class="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
+      問題集作成
+    </div>
+    <div class="mb-4">
+      <%= new_collection.text_field :title, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', placeholder: '問題集タイトル' %>
+    </div>
+    <div class="flex items-center justify-between">
+      <%= new_collection.submit '作成', class: 'px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 cursor-pointer' %>
+    </div>
+    <% end %>
+  </div>
+</div>

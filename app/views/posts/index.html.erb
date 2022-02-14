@@ -3,7 +3,18 @@
 <% end %>
 
 <!-- all posts -->
-<div class="container mt-20 w-2/3 mx-auto">
+<div class="container mt-5 lg:mt-20 lg:w-2/3 mx-auto px-1">
+  <ul class="lg:flex text-center gap-6 mb-10 justify-center text-lg font-bold">
+    <li class="hover:underline cursor-pointer">
+      <%= link_to '最新の問題', root_path %>
+    </li>
+    <li class="hover:underline cursor-pointer mt-3">
+      <%= link_to '問題集から探す', collections_path %>
+    </li>
+    <li class="hover:underline cursor-pointer mt-3">
+      <%= link_to 'カテゴリーから探す', categories_path %>
+    </li>
+  </ul>
 
   <% if user_signed_in? %>
   <%= search_form_for @query, url: search_posts_path do |search| %>
@@ -56,7 +67,5 @@
     </div>
   </div>
   <% end %>
-  <% if @posts.method_defined?(:total_pages)%>
   <%= paginate @posts %>
-  <% end %>
 </div>

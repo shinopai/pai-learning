@@ -4,7 +4,7 @@
     <h1 class="text-2xl font-bold">PaiLearning</h1>
     <% end %>
   </div>
-  <div class="block lg:hidden">
+  <div class="block lg:hidden" id="show-dropdown">
     <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
       <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <title>Menu</title>
@@ -12,15 +12,17 @@
       </svg>
     </button>
   </div>
+
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="lg:flex-grow">
+    <div class="lg:flex-grow hidden lg:block">
       <% if user_signed_in? %>
       <span>
         ようこそ&nbsp;<%= link_to user_mypage_path(current_user.id), class: 'block mt-4 lg:inline-block lg:mt-0 text-blue-300 hover:text-blue-500 mr-4' do %>
         <%= current_user.name %>さん
         <% end %>
       </span>
-      <%= link_to '新規投稿', new_user_post_path(current_user.id), class: 'block mt-4 lg:inline-block lg:mt-0 bg-blue-300 hover:text-blue-500 mr-4 p-2 text-white' %>
+      <%= link_to '問題作成', new_user_post_path(current_user.id), class: 'block mt-4 lg:inline-block lg:mt-0 bg-blue-300 hover:text-blue-500 mr-4 p-2 text-white' %>
+      <%= button_tag '新規問題集作成', class: 'block mt-4 lg:inline-block lg:mt-0 bg-blue-300 hover:text-blue-500 mr-4 p-2 text-white', id: 'show-collection-form' %>
       <% else %>
       <%= link_to 'ログイン', new_user_session_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-blue-300 hover:text-blue-500 mr-4' %>
       <%= link_to '新規登録', new_user_registration_path, class: 'block mt-4 lg:inline-block lg:mt-0 bg-blue-300 hover:text-blue-500 mr-4 p-2 text-white' %>
@@ -28,3 +30,40 @@
     </div>
   </div>
 </nav>
+
+<!-- menu for sp -->
+<ul class="text-center py-3 border-4 font-bold hidden" id="dropdown">
+  <li class="border-b p-1 py-2"><i class="fa-solid fa-user" style="vertical-align: -2px;"></i>&nbsp;<%= current_user.name %>さん</li>
+  <li class="p-1 py-2"><%= link_to new_user_post_path(current_user.id) do %><i class="fa-solid fa-plus" style="vertical-align: -2px;"></i>&nbsp;問題を作成<% end %></li>
+  <li class="p-1 py-2 border-b" id="create-collection-form-sp-menu"><i class="fa-solid fa-folder-plus" style="vertical-align: -2px;"></i>&nbsp;問題集を作成
+    <ul class="hidden" id="create-collection-form-sp">
+      <li class="p-1 py-2">
+        <div class="flex items-center justify-center bg-gray-700" id="create-collection-form">
+          <div class="w-full max-w-md">
+            <%= form_with model: Collection.new, url: user_collections_path(current_user), class: 'bg-white shadow-lg rounded px-12 pt-6 py-5', local: true do |new_collection| %>
+            <div class="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
+              問題集作成
+            </div>
+            <div class="mb-4">
+              <%= new_collection.text_field :title, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', placeholder: '問題集タイトル' %>
+            </div>
+            <div class="flex items-center justify-between">
+              <%= new_collection.submit '作成', class: 'px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 cursor-pointer' %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </li>
+  <li class="p-1 py-2">
+    <%= link_to user_mypage_path(current_user.id) do %>
+    <i class="fa-solid fa-address-card" style="vertical-align: -2px;"></i>&nbsp;マイページ
+    <% end %>
+  </li>
+  <li class="p-1 py-2 border-b" class="border-b"><%= link_to user_edit_path(current_user) do %><i class="fa-solid fa-user-pen" style="vertical-align: -2px;"></i>&nbsp;ユーザー情報編集<% end %></li>
+  <li class="p-1 py-2">
+    <%= link_to destroy_user_session_path, method: :delete do %><i class="fa-solid fa-arrow-right-from-bracket" style="vertical-align: -2px;"></i>&nbsp;ログアウト<% end %>
+  </li>
+</ul>

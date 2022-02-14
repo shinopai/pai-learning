@@ -45,14 +45,19 @@ class PostsController < ApplicationController
   end
 
   def search
-    res = @query.result
-    @posts = res.joins(:user, :category).select('posts.*, users.name as user_name, users.user_image, users.id as user_id, categories.name')
+    res = @query.result.page(params[:page]).per(20)
+    @posts = res.joins(:user, :category).select('posts.*, users.name as user_name, users.user_image, users.id as user_id, categories.name').order(created_at: :desc)
 
     render 'index'
   end
 
   def show
     @comment = Comment.new
+
+    if user_signed_in?
+      @current_user = current_user
+      @collections = Collection.where(user_id: @current_user.id)
+    end
   end
 
   private

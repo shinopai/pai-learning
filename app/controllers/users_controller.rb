@@ -18,10 +18,14 @@ class UsersController < ApplicationController
   end
 
   def get_all_posts
+    @posts = @user.posts.page(params[:page]).per(20)
+
     render 'all_posts'
   end
 
   def get_all_likes
+    @likes = @user.likes.page(params[:page]).per(20)
+
     render 'all_likes'
   end
 

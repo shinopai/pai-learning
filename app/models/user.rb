@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :collections, dependent: :destroy
 
   # carrierwave
   mount_uploader :user_image, UserImageUploader

@@ -1,0 +1,30 @@
+<div class="container mt-5 lg:mt-20 lg:w-2/3 mx-auto px-1">
+  <ul class="lg:flex text-center gap-6 mb-10 justify-center text-lg font-bold">
+    <li class="hover:underline cursor-pointer">
+      <%= link_to '最新の問題', root_path %>
+    </li>
+    <li class="hover:underline cursor-pointer mt-3">
+      <%= link_to '問題集から探す', collections_path %>
+    </li>
+    <li class="hover:underline cursor-pointer mt-3">
+      <%= link_to 'カテゴリーから探す', categories_path %>
+    </li>
+  </ul>
+
+  <div class="flex items-center justify-center">
+    <div class="container">
+      <div class="flex justify-center p-4 mb-5">
+        <h1 class="text-xl font-bold">カテゴリー一覧</h1>
+      </div>
+      <div class="flex justify-center">
+        <div class="bg-white w-full">
+          <ul class="divide-y divide-gray-300 border">
+            <% @categories.each do |category| %>
+            <li class="p-4 hover:bg-gray-50 cursor-pointer"><%= link_to category.name, category_path(category) %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

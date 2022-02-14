@@ -1,12 +1,26 @@
-<div class="container mt-10 w-2/3 mx-auto">
+<div class="container mt-10 lg:w-2/3 px-3 mx-auto">
   <div class="grid overflow-hidden grid-cols-1 grid-rows-5 gap-2">
-    <div class="box flex gap-2">
+    <div class="box flex gap-2 relative">
       <% if @user.user_image.present? %>
       <%= image_tag @user.user_image.url, class: 'w-12 h-12 rounded-full' %>
       <% else %>
       <%= image_tag 'user.jpg', class: 'w-12 h-12 rounded-full' %>
       <% end %>
       <div class="text-lg font-bold"><%= @post.user.name %></div>
+      <% if user_signed_in? %>
+      <%= button_tag '', type: 'button', class: 'border px-1 h-10 bg-blue-300 text-white font-bold rounded-xl', id: 'show-collection-list' do %>
+      <i class="fa-solid fa-plus"></i>&nbsp;問題集に追加する
+      <% end %>
+      <ul class="absolute -bottom-3 left-36 border p-3 w-auto hidden" id="collection-list">
+        <% if @collections.exists? %>
+        <% @collections.each do |collection| %>
+        <li><%= link_to collection.title, collection_post_elements_path(collection.id, @post), method: :post, class: 'hover:bg-gray-300 p-2' %></li>
+        <% end %>
+        <% else %>
+        <li>問題集を作成してください</li>
+        <% end %>
+      </ul>
+      <% end %>
     </div>
     <div class="box">
       <h1 class="text-2xl font-bold mb-3"><%= @post.title %></h1>
@@ -23,7 +37,9 @@
       </div>
       <p class="mt-3 hidden" id="answer<%= @post.id %>"><%= @post.answer %></p>
     </div>
+    <% if user_signed_in? %>
     <div id="pai-app"></div>
+    <% end %>
   </div>
 
   <!-- comment area -->
@@ -37,6 +53,7 @@
       </ul>
     </div>
     <% end %>
+    <% if user_signed_in? %>
     <section class="rounded-b-lg  mt-4 ">
       <%= form_with model: @comment, url: user_post_comments_path(current_user.id, @post.id), local: true do |new_comment| %>
       <%= new_comment.text_area :body, class: 'w-full p-4 border-2 mb-4 rounded-lg focus:shadow-outline resize-none', placeholder: 'コメント(500字以内)', rows: 6, cols: 6 %>
@@ -70,6 +87,9 @@
         <!--  comment end-->
       </div>
     </section>
+    <% else %>
+    <p class="text-center">この問題にコメントをしたりお気に入りに登録するには<%= link_to 'ログイン', new_user_session_path, class: 'text-blue-500 hover:underline' %>が必要です</p>
+    <% end %>
   </div>
 </div>
 

@@ -56,4 +56,31 @@ Rails.application.routes.draw do
     end
   end
 
+  # categories
+  get '/categories', to: 'categories#index', as: :categories
+  get '/categories/:id', to: 'categories#show', as: :category
+
+  # collections
+  resources :users do
+    resources :collections, only: %i(create destroy) do
+      collection do
+        get :list
+      end
+      member do
+        get :show_contents
+      end
+    end
+  end
+
+  get '/collections', to: 'collections#index', as: :collections
+
+  # elements
+  resources :collections do
+    resources :posts do
+      resources :elements, only: %i(create) do
+      end
+    end
+  end
+
+  get '/element_notice', to: 'elements#show_notice', as: :show_notice
 end

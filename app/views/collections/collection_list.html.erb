@@ -1,0 +1,22 @@
+<div class="container mt-20 w-2/3 mx-auto">
+  <h1 class="text-xl font-bold text-center">問題集(<%= @collections.size %>件)</h1>
+  <% if @collections.any? %>
+  <% @collections.each do |collection| %>
+  <div class="w-full bg-white h-auto tracking-wide mt-10 mx-auto border border-black-800 rounded-lg relative">
+    <h5 class="text-3xl font-semibold pl-6 pt-6 pr-6 pb-2 text-center">
+      <%= link_to collection.title, show_contents_user_collection_path(current_user, collection), class: 'text-blue-500 hover:underline' %>
+    </h5>
+    <p class="text-md font-regular p-6 pt-0 text-gray-500 text-center">
+      <%= collection.posts.size %>個の問題を登録済み
+    </p>
+    <p class="text-md font-regular p-2 pt-0 text-gray-500 text-right">
+      <%= link_to user_collection_path(current_user, collection), method: :delete, data: { confirm: 'この問題集を削除してよろしいですか？' } do %>
+      <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+    </p>
+  </div>
+  <% end %>
+  <% else %>
+  <p class="text-center mt-5">問題集はまだありません</p>
+  <% end %>
+</div>
