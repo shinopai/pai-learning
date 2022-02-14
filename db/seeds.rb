@@ -7,15 +7,38 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-# 20.times do
-# User.create([
-#   'name' => Faker::Name.unique.name,
-#   'email' => Faker::Internet.unique.email,
-#   'password' => 'password'
-# ]);
-# end
+arr = [
+  'HTML',
+  'CSS',
+  'Ruby',
+  'Ruby On Rails',
+  'JavaScript',
+  'Vue',
+  'サーバー',
+  'セキュリティー',
+  'ネットワーク',
+  'Docker',
+  '基礎知識',
+  'その他'
+];
 
-100.times do
+arr.size.times do |i|
+  Category.create([
+    'name' => arr[i],
+    'created_at' => Time.now,
+    'updated_at' => Time.now
+  ]);
+end
+
+20.times do
+User.create([
+  'name' => Faker::Name.unique.name,
+  'email' => Faker::Internet.unique.email,
+  'password' => 'password'
+]);
+end
+
+250.times do
 Post.create([
   'title' => Faker::Movie.title,
   'question' => Faker::Quote.famous_last_words,
