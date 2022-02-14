@@ -31,9 +31,13 @@
   </div>
 </nav>
 
-<!-- menu for sp -->
 <% if user_signed_in? %>
+<%= render 'partial/create_collection_form', locals: { user: current_user } %>
+<% end %>
+
+<!-- menu for sp -->
 <ul class="text-center py-3 border-4 font-bold hidden" id="dropdown">
+  <% if user_signed_in? %>
   <li class="border-b p-1 py-2"><i class="fa-solid fa-user" style="vertical-align: -2px;"></i>&nbsp;<%= current_user.name %>さん</li>
   <li class="p-1 py-2"><%= link_to new_user_post_path(current_user.id) do %><i class="fa-solid fa-plus" style="vertical-align: -2px;"></i>&nbsp;問題を作成<% end %></li>
   <li class="p-1 py-2 border-b" id="create-collection-form-sp-menu"><i class="fa-solid fa-folder-plus" style="vertical-align: -2px;"></i>&nbsp;問題集を作成
@@ -67,5 +71,16 @@
   <li class="p-1 py-2">
     <%= link_to destroy_user_session_path, method: :delete do %><i class="fa-solid fa-arrow-right-from-bracket" style="vertical-align: -2px;"></i>&nbsp;ログアウト<% end %>
   </li>
+  <% else %>
+  <li class="p-1 py-2">
+    <%= link_to new_user_session_path do %>
+    <i class="fa-solid fa-arrow-right-to-bracket" style="vertical-align: -2px;"></i>&nbsp;ログイン
+    <% end %>
+  </li>
+  <li class="p-1 py-2">
+    <%= link_to new_user_registration_path do %>
+    <i class="fa-solid fa-user-plus" style="vertical-align: -2px;"></i>&nbsp;新規登録
+    <% end %>
+  </li>
+  <% end %>
 </ul>
-<% end %>

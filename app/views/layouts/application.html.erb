@@ -14,10 +14,6 @@
 <body>
   <%= render 'partial/header' %>
 
-  <% if user_signed_in? %>
-  <%= render 'partial/create_collection_form', locals: { user: current_user } %>
-  <% end %>
-
   <% if flash[:notice] %>
   <p class="bg-green-300 text-center p-2 font-bold text-white"><%= notice %></p>
   <% end %>
