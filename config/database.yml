@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: pai_learning_production
-  username: pai_learning
-  password: <%= ENV['PAI_LEARNING_DATABASE_PASSWORD'] %>
+  database: <%= ENV['PAI_LEARNING_DATABASE'] %>
+  host: <%= ENV['PAI_LEARNING_HOST'] %>
+  username: <%= ENV['PAI_LEARNING_USERNAME'] %>
+  password: <%= ENV['PAI_LEARNING_PASSWORD'] %>
